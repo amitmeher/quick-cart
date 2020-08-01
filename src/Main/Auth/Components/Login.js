@@ -4,6 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 import { Paper, withStyles, Grid, TextField, Button, FormControlLabel, Checkbox } from '@material-ui/core';
 import { Face, Fingerprint } from '@material-ui/icons';
 import { Notify } from '../../../Util/NotificationProvider';
+import SignUp from './SignUp';
 import users from '../../../Store/data/users';
 
 const styles = theme => ({
@@ -18,6 +19,7 @@ const styles = theme => ({
 const LoginTab = props => {
     const { classes } = props;
     const [formData, setFormData] = useState({});
+    const [status, setStatus] = useState({});
     const [errors, setErrors] = useState({});
 
     const handleChange = event => {
@@ -58,50 +60,57 @@ const LoginTab = props => {
     }
 
     return (
-        <Grid container alignItems="center" justify="center" style={{ minHeight: '80vh' }} >
-            <Paper className={classes.padding}>
-                <div className={classes.margin}>
-                    <Grid container spacing={4} alignItems="flex-start">
-                        <Button color="secondary" style={{ textTransform: "none" }}>sign up</Button>
-                    </Grid>
-                    <Grid container spacing={4} alignItems="flex-end">
-                        <Grid item>
-                            <Face />
+        <>
+            <Grid container alignItems="center" justify="center" style={{ minHeight: '80vh' }} >
+                <Paper className={classes.padding}>
+                    <div className={classes.margin}>
+                        <Grid container spacing={4} alignItems="flex-start">
+                            <Button
+                                color="secondary"
+                                style={{ textTransform: "none" }}
+                                onClick={() => setStatus({ isSignUp: true })}
+                            >
+                                sign up
+                            </Button>
                         </Grid>
-                        <Grid item md={true} sm={true} xs={true}>
-                            <TextField
-                                name="username"
-                                label="Username"
-                                type="text"
-                                fullWidth
-                                autoFocus
-                                required
-                                value={formData.username || ""}
-                                onChange={handleChange}
-                                error={!!errors.username}
-                                helperText={errors.username}
-                            />
+                        <Grid container spacing={4} alignItems="flex-end">
+                            <Grid item>
+                                <Face />
+                            </Grid>
+                            <Grid item md={true} sm={true} xs={true}>
+                                <TextField
+                                    name="username"
+                                    label="Username"
+                                    type="text"
+                                    fullWidth
+                                    autoFocus
+                                    required
+                                    value={formData.username || ""}
+                                    onChange={handleChange}
+                                    error={!!errors.username}
+                                    helperText={errors.username}
+                                />
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid container spacing={4} alignItems="flex-end">
-                        <Grid item>
-                            <Fingerprint />
+                        <Grid container spacing={4} alignItems="flex-end">
+                            <Grid item>
+                                <Fingerprint />
+                            </Grid>
+                            <Grid item md={true} sm={true} xs={true}>
+                                <TextField
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    fullWidth
+                                    required
+                                    value={formData.password || ""}
+                                    onChange={handleChange}
+                                    error={!!errors.password}
+                                    helperText={errors.password}
+                                />
+                            </Grid>
                         </Grid>
-                        <Grid item md={true} sm={true} xs={true}>
-                            <TextField
-                                name="password"
-                                label="Password"
-                                type="password"
-                                fullWidth
-                                required
-                                value={formData.password || ""}
-                                onChange={handleChange}
-                                error={!!errors.password}
-                                helperText={errors.password}
-                            />
-                        </Grid>
-                    </Grid>
-                    {/* <Grid container alignItems="center" justify="space-between">
+                        {/* <Grid container alignItems="center" justify="space-between">
                             <Grid item>
                                 <FormControlLabel control={
                                     <Checkbox
@@ -113,22 +122,21 @@ const LoginTab = props => {
                                 <Button disableFocusRipple disableRipple style={{ textTransform: "none" }} variant="text" color="primary">Forgot password ?</Button>
                             </Grid>
                         </Grid> */}
-                    <Grid container justify="center" style={{ marginTop: '10px' }}>
-                        <Button
-                            variant="outlined"
-                            color="primary"
-                            style={{ textTransform: "none" }}
-                            onClick={handleLogin}
-                        >
-                            Login
+                        <Grid container justify="center" style={{ marginTop: '10px' }}>
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                style={{ textTransform: "none" }}
+                                onClick={handleLogin}
+                            >
+                                Login
                         </Button>
-                    </Grid>
-                </div>
-            </Paper>
-            {/* <Grid container justify="center">
-                    <Button color="secondary" style={{ textTransform: "none" }}>sign up</Button>
-                </Grid> */}
-        </Grid>
+                        </Grid>
+                    </div>
+                </Paper>
+            </Grid>
+            {status.isSignUp && <SignUp open handleClose={() => setStatus({ isSignUp: false })} />}
+        </>
     );
 }
 

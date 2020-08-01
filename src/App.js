@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -6,16 +7,14 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import Theme from './Styles/Theme';
 import NotificationProvider from './Util/NotificationProvider';
 import JavaScript from './Main/Questions/Components/JavaScript';
-import Login from './Main/Auth';
+import Application from './Application';
 
 function App() {
   return (
     <MuiThemeProvider theme={Theme}>
-      {/* <SnackbarProvider maxSnack={1}> */}
       <NotificationProvider>
-        <Login />
+        <Application />
       </NotificationProvider>
-      {/* </SnackbarProvider> */}
     </MuiThemeProvider>
   );
 }
