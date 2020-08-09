@@ -52,7 +52,7 @@ const CartList = props => {
                         </span>
                         <Button
                             variant="contained"
-                            style={{ backgroundColor: '#FF6666', color: 'white', float: "right", padding: 5, marginTop: 2 }}
+                            style={{ backgroundColor: itemCount ? '#FF6666' : '', color: 'white', float: "right", padding: 5, marginTop: 2 }}
                             disabled={!itemCount}
                             onClick={() => dispatch(placeOrder())}
                         >
