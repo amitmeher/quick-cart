@@ -3,8 +3,8 @@ import trimStart from 'lodash/trimStart';
 import isEmpty from 'lodash/isEmpty';
 import { Dialog, Paper, withStyles, Grid, TextField, Button, FormControlLabel, Checkbox } from '@material-ui/core';
 import { Face, Fingerprint } from '@material-ui/icons';
-import { Notify } from '../../../Util/NotificationProvider';
-import users from '../../../Store/data/users';
+import { Notify } from '../../Util/NotificationProvider';
+import users from '../../Store/data/users';
 
 const styles = theme => ({
     margin: {

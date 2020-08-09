@@ -1,16 +1,17 @@
 const Styles = theme => ({
     fullOuter: {
-        padding: 15,
+        padding: 10,
         boxSizing: 'border-box',
-        width: '100vw',
-        height: '100vh',
+        width: 'auto',
+        height: 'auto',
         display: 'block',
-        overflowY: 'scroll',
-        overflowX: 'hidden'
+        // overflowY: 'scroll',
+        overflowX: 'hidden',
+        backgroundColor: '#FFE1D4'
     },
     drawerViewBody: {
-        padding: 15,
-        marginTop: 15
+        padding: 5,
+        marginTop: 5
     },
     question: {
         color: 'blue',

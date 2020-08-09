@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import trimStart from 'lodash/trimStart';
 import isEmpty from 'lodash/isEmpty';
 import { Paper, withStyles, Grid, TextField, Button, FormControlLabel, Checkbox } from '@material-ui/core';
 import { Face, Fingerprint } from '@material-ui/icons';
-import { Notify } from '../../../Util/NotificationProvider';
+import { Notify } from '../../Util/NotificationProvider';
 import SignUp from './SignUp';
-import users from '../../../Store/data/users';
+import users from '../../Store/data/users';
 
 const styles = theme => ({
     margin: {
@@ -17,7 +17,7 @@ const styles = theme => ({
 });
 
 const LoginTab = props => {
-    const { classes } = props;
+    const { classes, setUserLogged } = props;
     const [formData, setFormData] = useState({});
     const [status, setStatus] = useState({});
     const [errors, setErrors] = useState({});
@@ -38,8 +38,8 @@ const LoginTab = props => {
             const errors = validateError(prevFormData);
             if (isEmpty(errors)) {
                 const isAuthorized = checkAuthorization(prevFormData);
-                if (isAuthorized) Notify('isAuthorized', 'success');
-                else Notify('isNotAuthorized', 'error');
+                if (isAuthorized) setUserLogged(true);
+                else Notify('User Not Found', 'error');
             }
             else setErrors(errors);
 
@@ -59,18 +59,22 @@ const LoginTab = props => {
         return user?.password === password;
     }
 
+    useEffect(() => {
+        console.log('1000');
+    }, 1000);
+
     return (
         <>
             <Grid container alignItems="center" justify="center" style={{ minHeight: '80vh' }} >
                 <Paper className={classes.padding}>
                     <div className={classes.margin}>
-                        <Grid container spacing={4} alignItems="flex-start">
+                        <Grid container spacing={4} justify="flex-end">
                             <Button
                                 color="secondary"
                                 style={{ textTransform: "none" }}
                                 onClick={() => setStatus({ isSignUp: true })}
                             >
-                                sign up
+                                Sign up
                             </Button>
                         </Grid>
                         <Grid container spacing={4} alignItems="flex-end">
